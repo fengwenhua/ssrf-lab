@@ -1,15 +1,13 @@
 <?php
-function getUrlContent($url){
-    $url = escapeshellarg($url);
-    $pl = "curl ".$url;
-    $content = shell_exec($pl);
-    return $content;
-}
-
-if (isset($_POST['handler'])&&!empty($_POST['handler']))
-{
-    $url = $_POST['handler'];
-    $content_url = getUrlContent($url);
-    echo $content_url;
-}
+    // create curl resource
+    $ch = curl_init();
+    // set url
+    curl_setopt($ch, CURLOPT_URL, $_POST["handler"]);
+    //return the transfer as a string
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    // $output contains the output string
+    $output = curl_exec($ch);
+    // close curl resource to free up system resources
+    curl_close($ch);
+    echo $output;
 ?>

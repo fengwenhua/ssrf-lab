@@ -71,3 +71,18 @@ $("#hook").submit(
 		event.preventDefault();
 	}
 );
+
+$("#hook1").submit(
+	function(event){
+		$.ajax({
+			type: 'POST',
+			url: $("#hook1").attr("action"),
+			data: $("#hook1").serialize(),
+			success: function(response) {
+				$("#result").text(response);
+			},
+		});
+		event.preventDefault();
+	}
+);
+
